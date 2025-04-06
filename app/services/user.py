@@ -13,9 +13,13 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(User).offset(skip).limit(limit).all()
 
 def create_user(db: Session, user: UserCreate):
+    existing_user = db.query(User).filter(User.email == user.email).first()
+    if existing_user:
+        raise ValueError("E-mail já está em uso.")
+
     hashed_password = pwd_context.hash(user.password)
     db_user = User(
-        user=user.name,
+        username=user.username,
         email=user.email,
         hashed_password=hashed_password
     )
