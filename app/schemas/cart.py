@@ -16,4 +16,4 @@ class CartResponse(CartBase):
     items: List[CartItemResponse] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True

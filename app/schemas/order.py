@@ -18,4 +18,4 @@ class OrderResponse(OrderBase):
     items: List[OrderItemResponse]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
